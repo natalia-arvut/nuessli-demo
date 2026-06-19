@@ -1,0 +1,6 @@
+.DS_Store
+.work/
+.claude/
+.playwright-mcp/
+server.js
+*_check.html
