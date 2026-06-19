@@ -40,7 +40,7 @@ tailwind.config = {
   /* hazard stripe */
   .hazard{background:repeating-linear-gradient(135deg,#d62828 0 14px,#0e2148 14px 28px)}
   .hero-img{object-position:center}
-  @media(min-width:1024px){.hero-img{object-position:50% 64%}}
+  @media(min-width:1024px){.hero-img{object-position:50% 82%}}
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
   .card-img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -77,13 +77,13 @@ tailwind.config = {
       <source media="(min-width:1024px)" srcset="images/hero_pass_graded.jpg">
       <img src="images/hero_pass_mobile.jpg" alt="Nüssli Reisecar auf einem Schweizer Alpenpass" class="hero-img w-full h-full object-cover" />
     </picture>
-    <div class="hidden lg:block absolute inset-0 bg-gradient-to-r from-navy via-navy/75 to-transparent"></div>
-    <div class="hidden lg:block absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent"></div>
+    <div class="hidden lg:block absolute inset-0 bg-gradient-to-b from-navy/95 via-navy/35 to-transparent"></div>
+    <div class="hidden lg:block absolute inset-0 bg-gradient-to-r from-navy/60 via-navy/10 to-transparent"></div>
     <div class="lg:hidden absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-navy to-transparent"></div>
   </div>
 
   <!-- Текст: под фото на мобильном; поверх фото слева на десктопе -->
-  <div class="relative z-[1] max-w-7xl mx-auto w-full px-6 sm:px-8 py-12 lg:py-0 lg:min-h-[88vh] lg:flex lg:items-center">
+  <div class="relative z-[1] max-w-7xl mx-auto w-full px-6 sm:px-8 py-12 lg:pt-24 lg:pb-0 lg:min-h-screen lg:flex lg:items-start">
     <div class="max-w-xl lg:max-w-2xl [text-shadow:0_2px_18px_rgba(7,12,30,.5)]">
       <div class="flex items-center gap-3 mb-6">
         <span class="h-[3px] w-12 shrink-0 bg-signal"></span>
