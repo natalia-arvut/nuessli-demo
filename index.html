@@ -40,7 +40,7 @@ tailwind.config = {
   /* hazard stripe */
   .hazard{background:repeating-linear-gradient(135deg,#d62828 0 14px,#0e2148 14px 28px)}
   .hero-img{object-position:center}
-  @media(min-width:1024px){.hero-img{object-position:34% 58%}}
+  @media(min-width:1024px){.hero-img{object-position:50% 64%}}
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
   .card-img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -71,44 +71,44 @@ tailwind.config = {
 
 <!-- Hero -->
 <section class="relative bg-navy overflow-hidden">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-12 items-stretch">
+  <!-- Фото: полоса сверху на мобильном; на всю ширину (full-bleed) на десктопе -->
+  <div class="relative h-64 sm:h-80 w-full lg:absolute lg:inset-0 lg:h-full">
+    <picture>
+      <source media="(min-width:1024px)" srcset="images/hero_pass_graded.jpg">
+      <img src="images/hero_pass_mobile.jpg" alt="Nüssli Reisecar auf einem Schweizer Alpenpass" class="hero-img w-full h-full object-cover" />
+    </picture>
+    <div class="hidden lg:block absolute inset-0 bg-gradient-to-r from-navy via-navy/75 to-transparent"></div>
+    <div class="hidden lg:block absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent"></div>
+    <div class="lg:hidden absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-navy to-transparent"></div>
+  </div>
 
-    <!-- Image (сверху на мобильном, справа на десктопе) -->
-    <div class="order-1 lg:order-2 lg:col-span-7 min-w-0 relative h-60 sm:h-80 lg:h-auto lg:min-h-[80vh]">
-      <picture>
-        <source media="(min-width:1024px)" srcset="images/hero_pass_graded.jpg">
-        <img src="images/hero_pass_mobile.jpg" alt="Nüssli Reisecar auf einem Schweizer Alpenpass" class="hero-img absolute inset-0 w-full h-full object-cover" />
-      </picture>
-      <div class="hidden lg:block absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-navy via-navy/40 to-transparent"></div>
-      <div class="lg:hidden absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-navy to-transparent"></div>
-      <div class="absolute bottom-0 inset-x-0 h-2 hazard opacity-90"></div>
-    </div>
-
-    <!-- Text -->
-    <div class="order-2 lg:order-1 lg:col-span-5 min-w-0 px-6 sm:px-8 py-12 sm:py-14 lg:py-24 flex flex-col justify-center">
+  <!-- Текст: под фото на мобильном; поверх фото слева на десктопе -->
+  <div class="relative z-[1] max-w-7xl mx-auto w-full px-6 sm:px-8 py-12 lg:py-0 lg:min-h-[88vh] lg:flex lg:items-center">
+    <div class="max-w-xl lg:max-w-2xl [text-shadow:0_2px_18px_rgba(7,12,30,.5)]">
       <div class="flex items-center gap-3 mb-6">
         <span class="h-[3px] w-12 shrink-0 bg-signal"></span>
         <span class="eyebrow text-signal text-[11px] sm:text-xs">Familienbetrieb seit 1962</span>
       </div>
-      <h1 class="text-white font-800 uppercase leading-[1.04] tracking-tight break-words max-w-full" style="font-size:clamp(1.6rem,5.2vw,3.4rem)">
+      <h1 class="text-white font-800 uppercase leading-[1.04] tracking-tight break-words max-w-full" style="font-size:clamp(1.7rem,5.2vw,3.6rem)">
         Willkommen bei der
         <span class="block text-steel">Firma Nüssli AG Agasul</span>
       </h1>
-      <p class="mt-6 text-white/85 leading-relaxed max-w-md" style="font-size:clamp(1rem,1.1vw,1.125rem)">
+      <p class="mt-6 text-white/90 leading-relaxed max-w-md" style="font-size:clamp(1rem,1.1vw,1.125rem)">
         Carreisen · Kranarbeiten · Transporte · Werkstatt – aus einer Hand. Ein reiner Familienbetrieb mit persönlichem Kundenkontakt im Zürcher Oberland.
       </p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 [text-shadow:none]">
         <a href="#bereiche" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-signal hover:bg-signal-600 text-white font-head font-600 uppercase tracking-wider px-7 py-3.5 rounded-sm transition-colors">
           Unsere Geschäftsbereiche
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="tel:0523461415" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto whitespace-nowrap border border-white/30 hover:border-white text-white font-head font-500 uppercase tracking-wider px-7 py-3.5 rounded-sm transition-colors">
+        <a href="tel:0523461415" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto whitespace-nowrap border border-white/40 hover:border-white text-white font-head font-500 uppercase tracking-wider px-7 py-3.5 rounded-sm transition-colors backdrop-blur-sm bg-white/5">
           052 346 14 15
         </a>
       </div>
     </div>
-
   </div>
+
+  <div class="absolute bottom-0 inset-x-0 h-2 hazard opacity-90 z-[2]"></div>
 </section>
 
 <!-- Stats -->
