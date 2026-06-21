@@ -9,21 +9,24 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
   theme: {
     extend: {
       colors: {
-        navy:  { DEFAULT:'#0e2148', 700:'#16306b', 600:'#1b3a7e', 500:'#2b5cb0' },
-        steel: '#2f6fd0',
-        signal:{ DEFAULT:'#d62828', 600:'#b81e1e' },
-        ink:   '#0c1424',
+        navy:  { DEFAULT:'#0b1430', 700:'#16306b', 600:'#1b3a7e', 500:'#2b5cb0' },
+        steel: '#5b81b8',
+        signal:{ DEFAULT:'#c42e33', 600:'#a8262b' },
+        ink:   '#080d22',
         mist:  '#f4f6fb',
+        sand:  '#e7c98e',
+        cream: '#f4f1ea',
       },
       fontFamily: {
         head: ['Archivo','sans-serif'],
         body: ['Manrope','sans-serif'],
+        serif:['Fraunces','Georgia','serif'],
       },
     }
   }
@@ -46,6 +49,17 @@ tailwind.config = {
   .card-img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
   .group:hover .card-img{transform:scale(1.06)}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.card-img{transition:none}}
+  /* --- Hero дизайн-слой --- */
+  .kenburns{animation:kb 18s ease-out forwards}
+  @keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+  .h-rise{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .d1{animation-delay:.15s}.d2{animation-delay:.32s}.d3{animation-delay:.5s}.d4{animation-delay:.68s}.d5{animation-delay:.86s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .hero-rule{height:1px;background:linear-gradient(90deg,var(--tw-gradient-stops))}
+  /* heritage seal */
+  .seal{animation:spin 60s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.kenburns,.h-rise,.seal{animation:none}.h-rise{opacity:1;transform:none}}
 </style>
 </head>
 <body class="antialiased">
@@ -70,68 +84,96 @@ tailwind.config = {
 </header>
 
 <!-- Hero -->
-<section class="relative bg-navy overflow-hidden">
-  <!-- Фото: полоса сверху на мобильном; на всю ширину (full-bleed) на десктопе -->
-  <div class="relative h-72 sm:h-96 w-full lg:absolute lg:inset-0 lg:h-full">
+<section class="relative bg-ink overflow-hidden">
+  <!-- Фото: полоса сверху на мобильном; full-bleed на десктопе -->
+  <div class="relative h-[44vh] min-h-[300px] sm:h-[58vh] w-full lg:absolute lg:inset-0 lg:h-full overflow-hidden">
     <picture>
-      <source media="(min-width:1024px)" srcset="images/hero_master.jpg">
-      <img src="images/hero_mobile.jpg" alt="Nüssli Reisecar auf einem Schweizer Alpenpass" class="hero-img w-full h-full object-cover" />
+      <source media="(min-width:1024px)" srcset="images/hero2.jpg">
+      <img src="images/hero2_mobile.jpg" alt="Nüssli Reisecar auf einer Schweizer Landstrasse im Abendlicht" class="kenburns w-full h-full object-cover object-[68%_center]" />
     </picture>
-    <!-- Десктоп: затемнение сверху (под текст) + слева, автобус внизу остаётся чистым -->
-    <div class="hidden lg:block absolute inset-0" style="background:linear-gradient(to bottom,rgba(14,33,72,.92) 0%,rgba(14,33,72,.70) 28%,rgba(14,33,72,.34) 50%,rgba(14,33,72,0) 70%)"></div>
-    <div class="hidden lg:block absolute inset-0" style="background:radial-gradient(130% 95% at 16% 32%,rgba(10,16,32,.80) 0%,rgba(10,16,32,.42) 40%,rgba(10,16,32,0) 68%)"></div>
-    <div class="hidden lg:block absolute inset-x-0 bottom-0 h-28" style="background:linear-gradient(to top,rgba(12,20,36,.45),rgba(12,20,36,0))"></div>
-    <!-- Мобильный: лёгкое затемнение по краям полосы -->
-    <div class="lg:hidden absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-navy/20"></div>
+    <!-- Многослойный scrim (не плоский): бок + низ + виньетка + верх под навигацию -->
+    <div class="hidden lg:block absolute inset-0" style="background:linear-gradient(100deg,rgba(8,13,34,.86) 0%,rgba(8,13,34,.48) 32%,rgba(8,13,34,0) 60%)"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(8,13,34,.92) 0%,rgba(8,13,34,.30) 22%,rgba(8,13,34,0) 46%)"></div>
+    <div class="hidden lg:block absolute inset-0" style="background:radial-gradient(125% 125% at 72% 42%,transparent 44%,rgba(6,10,24,.45) 100%)"></div>
+    <div class="absolute inset-x-0 top-0 h-24" style="background:linear-gradient(to bottom,rgba(8,13,34,.5),transparent)"></div>
   </div>
 
-  <!-- Текст: под фото на мобильном; поверх фото слева на десктопе -->
-  <div class="relative z-[1] max-w-7xl mx-auto w-full px-6 sm:px-8 py-12 lg:py-0 lg:min-h-[88vh] lg:flex lg:items-start lg:pt-28">
-    <div class="max-w-xl lg:max-w-2xl [text-shadow:0_2px_22px_rgba(7,12,30,.55)]">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="h-[3px] w-12 shrink-0 bg-signal"></span>
-        <span class="eyebrow text-signal text-[11px] sm:text-xs">Familienbetrieb seit 1962</span>
+  <!-- Рамка-кадр (editorial) -->
+  <div class="hidden lg:block pointer-events-none absolute inset-6 xl:inset-8 border border-cream/15 z-[2]"></div>
+
+  <!-- Heritage-печать «Seit 1962» -->
+  <div class="hidden lg:block absolute top-14 right-14 xl:right-16 z-[3]">
+    <svg viewBox="0 0 120 120" class="w-28 h-28 xl:w-32 xl:h-32 text-cream/85" fill="none">
+      <circle cx="60" cy="60" r="56" stroke="currentColor" stroke-opacity=".5" stroke-width="1"/>
+      <circle cx="60" cy="60" r="40" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>
+      <g class="seal" style="transform-origin:60px 60px">
+        <path id="sealpath" d="M60,11 a49,49 0 1,1 -0.1,0" fill="none"/>
+        <text fill="currentColor" font-family="Archivo, sans-serif" font-size="9.5" letter-spacing="3.4" font-weight="600">
+          <textPath href="#sealpath" startOffset="0">NÜSSLI · AGASUL · FAMILIENBETRIEB · SEIT 1962 · </textPath>
+        </text>
+      </g>
+      <text x="60" y="56" text-anchor="middle" fill="currentColor" font-family="Fraunces, serif" font-size="22" font-weight="600">1962</text>
+      <text x="60" y="72" text-anchor="middle" fill="currentColor" font-family="Archivo, sans-serif" font-size="7" letter-spacing="3" font-weight="600" opacity=".8">EST.</text>
+    </svg>
+  </div>
+
+  <!-- Текст -->
+  <div class="relative z-[2] max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-14 xl:px-16 py-12 lg:py-0 lg:min-h-[92vh] lg:flex lg:flex-col lg:justify-center">
+    <div class="max-w-xl lg:max-w-2xl">
+      <!-- kicker + линия -->
+      <div class="h-rise d1 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4 mb-7 [text-shadow:0_1px_10px_rgba(8,13,34,.6)]">
+        <span class="hero-rule w-14 shrink-0 from-signal to-sand"></span>
+        <span class="eyebrow text-cream text-[10px] sm:text-xs">
+          <span class="sm:hidden">Familienbetrieb seit 1962</span>
+          <span class="hidden sm:inline">Familienbetrieb seit 1962 · Zürcher Oberland</span>
+        </span>
       </div>
-      <h1 class="text-white font-800 uppercase leading-[1.04] tracking-tight break-words max-w-full" style="font-size:clamp(1.7rem,5.2vw,3.6rem)">
-        Willkommen bei der
-        <span class="block text-steel">Firma Nüssli AG Agasul</span>
+      <!-- H1 -->
+      <h1 class="h-rise d2 text-cream font-900 uppercase leading-[0.95] tracking-tight break-words [text-shadow:0_2px_28px_rgba(8,13,34,.45)]" style="font-size:clamp(2.6rem,7vw,5.6rem)">
+        Alles aus
+        <span class="block">einer <span class="text-sand">Hand</span></span>
       </h1>
-      <p class="mt-6 text-white/90 leading-relaxed max-w-md" style="font-size:clamp(1rem,1.1vw,1.125rem)">
-        Carreisen · Kranarbeiten · Transporte · Werkstatt – aus einer Hand. Ein reiner Familienbetrieb mit persönlichem Kundenkontakt im Zürcher Oberland.
+      <!-- subline -->
+      <p class="h-rise d3 mt-7 text-cream/85 leading-relaxed max-w-md" style="font-size:clamp(1.02rem,1.15vw,1.18rem)">
+        Carreisen, Kranarbeiten, Transporte und Werkstatt – ein reiner Familienbetrieb mit persönlichem Kundenkontakt, in dritter Generation.
       </p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 [text-shadow:none]">
-        <a href="#bereiche" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-signal hover:bg-signal-600 text-white font-head font-600 uppercase tracking-wider px-7 py-3.5 rounded-sm transition-colors">
-          Unsere Geschäftsbereiche
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <!-- CTA: одна красная + телефон-ссылка -->
+      <div class="h-rise d4 mt-9 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7">
+        <a href="#bereiche" class="group inline-flex items-center justify-center gap-2.5 bg-signal hover:bg-signal-600 text-white font-head font-600 uppercase tracking-wider text-sm px-8 py-4 rounded-sm transition-colors shadow-lg shadow-ink/40">
+          Geschäftsbereiche entdecken
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="tel:0523461415" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto whitespace-nowrap border border-white/50 hover:border-white text-white font-head font-500 uppercase tracking-wider px-7 py-3.5 rounded-sm transition-colors backdrop-blur-md bg-ink/35 hover:bg-ink/50">
-          052 346 14 15
+        <a href="tel:0523461415" class="group inline-flex items-center gap-3 text-cream font-head font-500 tracking-wide">
+          <svg class="w-4 h-4 text-sand" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h2.6a1 1 0 0 1 .95.68l1.1 3.3a1 1 0 0 1-.5 1.2l-1.6.8a13 13 0 0 0 6 6l.8-1.6a1 1 0 0 1 1.2-.5l3.3 1.1a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2A16 16 0 0 1 3 5Z"/></svg>
+          <span class="border-b border-cream/30 group-hover:border-cream pb-0.5 transition-colors">052 346 14 15</span>
         </a>
       </div>
     </div>
   </div>
 
-  <div class="absolute bottom-0 inset-x-0 h-2 hazard opacity-90 z-[2]"></div>
+  <div class="absolute bottom-0 inset-x-0 h-1.5 hazard opacity-90 z-[3]"></div>
 </section>
 
-<!-- Stats -->
-<section class="bg-navy text-white">
-  <div class="max-w-7xl mx-auto px-5 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
-    <div class="py-10 px-6 text-center reveal">
-      <div class="font-head font-700 text-5xl text-steel">1962</div>
-      <div class="mt-2 text-sm text-white/70 uppercase tracking-wider">Familienbetrieb seit</div>
-    </div>
-    <div class="py-10 px-6 text-center reveal">
-      <div class="font-head font-700 text-5xl text-steel">37<span class="text-2xl align-top">m</span></div>
-      <div class="mt-2 text-sm text-white/70 uppercase tracking-wider">Kranarbeiten bis</div>
-    </div>
-    <div class="py-10 px-6 text-center reveal">
-      <div class="font-head font-700 text-5xl text-steel">22<span class="text-2xl align-top">t</span></div>
-      <div class="mt-2 text-sm text-white/70 uppercase tracking-wider">Hebegewicht bis</div>
-    </div>
-    <div class="py-10 px-6 text-center reveal">
-      <div class="font-head font-700 text-5xl text-steel">8</div>
-      <div class="mt-2 text-sm text-white/70 uppercase tracking-wider">Cars & Kleinbusse</div>
+<!-- Stats: «парящая» стеклянная карточка внахлёст на герой (глубина) -->
+<section class="relative z-[5] bg-mist">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="-mt-16 lg:-mt-20 rounded-xl bg-white shadow-[0_30px_70px_-30px_rgba(8,13,34,.55)] ring-1 ring-navy/5 grid grid-cols-2 lg:grid-cols-4 divide-y divide-x divide-navy/10 overflow-hidden">
+      <div class="py-9 px-6 text-center reveal">
+        <div class="font-serif font-600 text-5xl text-navy leading-none">1962</div>
+        <div class="mt-3 text-[12px] text-slate-500 uppercase tracking-[.18em]">Familienbetrieb seit</div>
+      </div>
+      <div class="py-9 px-6 text-center reveal">
+        <div class="font-serif font-600 text-5xl text-navy leading-none">37<span class="text-2xl align-top text-sand">m</span></div>
+        <div class="mt-3 text-[12px] text-slate-500 uppercase tracking-[.18em]">Kranarbeiten bis</div>
+      </div>
+      <div class="py-9 px-6 text-center reveal">
+        <div class="font-serif font-600 text-5xl text-navy leading-none">22<span class="text-2xl align-top text-sand">t</span></div>
+        <div class="mt-3 text-[12px] text-slate-500 uppercase tracking-[.18em]">Hebegewicht bis</div>
+      </div>
+      <div class="py-9 px-6 text-center reveal">
+        <div class="font-serif font-600 text-5xl text-navy leading-none">8</div>
+        <div class="mt-3 text-[12px] text-slate-500 uppercase tracking-[.18em]">Cars & Kleinbusse</div>
+      </div>
     </div>
   </div>
 </section>
@@ -141,7 +183,7 @@ tailwind.config = {
   <div class="max-w-7xl mx-auto px-5">
     <div class="max-w-2xl mb-14 reveal">
       <span class="eyebrow text-signal text-xs">Vier Geschäftsbereiche</span>
-      <h2 class="mt-4 text-navy font-600 text-4xl sm:text-5xl uppercase leading-tight">Alles aus einer Hand</h2>
+      <h2 class="mt-4 text-navy font-700 text-4xl sm:text-5xl uppercase leading-tight">Carreisen · Kran<br class="hidden sm:block"> Transporte · Werkstatt</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-7">
       <!-- Carreisen -->
